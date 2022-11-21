@@ -2,16 +2,16 @@
 import axios from "axios";
 import queryString from "query-string";
 
-import APICONFIG from "./apiConfig";
+import API_CONFIG from "./apiConfig";
 
 const axiosClient = axios.create({
-  baseURL: APICONFIG.baseUrl,
+  baseURL: API_CONFIG.baseUrl,
   headers: {
     "Content-Type": "application/json",
   },
   paramsSerializer: (params: any) => queryString.stringify({
     ...params,
-    api_key: APICONFIG.apiKey,
+    api_key: API_CONFIG.apiKey,
   }),
 });
 
