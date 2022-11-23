@@ -4,6 +4,7 @@ import { Route, Routes } from "react-router-dom";
 import HomePage from "./HomePage";
 import CatalogPage from "./CatalogPage";
 import DetailPage from "./DetailPage";
+import NotFoundPage from "./NotFoundPage";
 
 const AppRouter = () => {
   return (
@@ -12,6 +13,7 @@ const AppRouter = () => {
       <Route path='/:category/:id' element={<DetailPage />} />
       <Route path="/category" element={<CatalogPage />} />
       <Route path="/" element={<HomePage />} />
+      <Route path="*" element={<NotFoundPage />} />
     </Routes>
   );
 };

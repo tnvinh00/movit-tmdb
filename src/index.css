@@ -3,7 +3,41 @@
 @tailwind utilities;
 
 @layer base {
-  html, body {
-    font-family: 'Quicksand', sans-serif;
-  }
+    html,
+    body {
+        font-family: "Nunito Sans", sans-serif;
+        font-size: 14px;
+        box-sizing: border-box;
+    }
+}
+
+@import url("https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;500;600;700;800&display=swap");
+
+@import url("https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css");
+
+body {
+    overflow: overlay;
+}
+
+*::-webkit-scrollbar {
+    display: block;
+    width: 6px;
+}
+
+*::-webkit-scrollbar-button {
+    display: none;
+}
+
+*::-webkit-scrollbar-track {
+    background-color: transparent;
+}
+
+*::-webkit-scrollbar-track-piece {
+    background-color: transparent;
+}
+
+*::-webkit-scrollbar-thumb {
+    background-color: #ccc;
+    border: 1px solid #bbb;
+    border-radius: 24px;
 }

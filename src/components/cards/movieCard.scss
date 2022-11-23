@@ -1,0 +1,30 @@
+.movie-card {
+  .movie-card__play {
+    opacity: 0;
+    transition: opacity 0.4s ease-in-out;
+    -webkit-transition: opacity 0.4s ease-in-out;
+    -moz-transition: opacity 0.4s ease-in-out;
+    -ms-transition: opacity 0.4s ease-in-out;
+    -o-transition: opacity 0.4s ease-in-out;
+    transition-delay: 0.2s;
+    background-color: rgb(0, 0, 0, 0.5);
+  }
+
+  &:hover {
+    .movie-card__play {
+      display: flex;
+      opacity: 1;
+      transition-delay: 0.2s;
+      transition: opacity 0.4s ease-in-out;
+      -webkit-transition: opacity 0.4s ease-in-out;
+      -moz-transition: opacity 0.4s ease-in-out;
+      -ms-transition: opacity 0.4s ease-in-out;
+      -o-transition: opacity 0.4s ease-in-out;
+
+      i {
+        // color youtube
+        color: #ff0000;
+      }
+    }
+  }
+}
