@@ -11,4 +11,9 @@ const LoadingSpinner = (props: any) => {
   )
 }
 
+LoadingSpinner.defaultProps = {
+  isLoading: true,
+  className: 'py-8'
+}
+
 export default LoadingSpinner

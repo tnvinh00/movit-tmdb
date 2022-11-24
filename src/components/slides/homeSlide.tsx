@@ -56,36 +56,38 @@ const HomeSlide = (props: IHomeSlideProps) => {
         spaceBetween={0}
         loop={true}
         slidesPerView={1}
-        autoplay={{
-          delay: 5000,
-          pauseOnMouseEnter: true,
-          disableOnInteraction: false
-        }}
+      // autoplay={{
+      //  delay: 5000,
+      //   pauseOnMouseEnter: true,
+      //   disableOnInteraction: false
+      // }}
       >
         {
           items.map((item, i) => (
             <SwiperSlide key={i}>
               {({ isActive }) => (
                 <div
-                  className={'relative px-20 pt-40 pb-20 bg-cover bg-no-repeat bg-center home-slide__item ' + (isActive ? 'active' : '')}
+                  className={'relative bg-cover bg-no-repeat bg-center home-slide__item ' + (isActive ? 'active' : '')}
                   style={{ backgroundImage: `url(${API_CONFIG.originalImage(item.backdrop_path ? item.backdrop_path : item.poster_path)})`, filter: 'brightness(0.9)' }}
                 >
-                  <div className="flex items-center justify-center relative">
-                    <div className="md:w-2/4 w-full py-5 home-slide__item__content">
-                      <h2 className="text-4xl md:text-6xl font-bold mb-12">{item.title}</h2>
-                      <p className="text-base font-medium leading-5 mb-8">{item.overview}</p>
-                      <div className="btns flex">
-                        <Button
-                        rounded
-                        classes='mr-4'
-                        onClick={() => navigate('/movie/' + item.id)}
-                        icon={<i className='bx bx-play-circle mr-2'></i>}
-                        label="Watch now" />
-                        <Button rounded outline onClick={() => onClickTrailer(item)} label="Trailer" />
+                  <div className='home-slide__item__overlay px-5 md:px-20 pt-40 pb-20'>
+                    <div className="flex items-center justify-center relative">
+                      <div className="md:w-2/4 w-full py-5 home-slide__item__content">
+                        <h2 className="text-4xl md:text-6xl font-bold mb-12">{item.title}</h2>
+                        <p className="text-base font-medium leading-5 mb-8">{item.overview}</p>
+                        <div className="btns flex">
+                          <Button
+                            rounded
+                            classes='mr-4'
+                            onClick={() => navigate('/movie/' + item.id)}
+                            icon={<i className='bx bx-play-circle mr-2'></i>}
+                            label="Watch now" />
+                          <Button rounded outline onClick={() => onClickTrailer(item)} label="Trailer" />
+                        </div>
                       </div>
-                    </div>
-                    <div className="hidden md:flex md:flex-1 items-center justify-center relative home-slide__item__image">
-                      <img className='shadow-lg rounded-lg' src={API_CONFIG.w500Image(item.poster_path)} alt="" />
+                      <div className="hidden md:flex md:flex-1 items-center justify-center relative home-slide__item__image">
+                        <img className='shadow-lg rounded-lg' src={API_CONFIG.w500Image(item.poster_path)} alt="" />
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -100,10 +102,10 @@ const HomeSlide = (props: IHomeSlideProps) => {
       >
         {isLoadingVideo ? (
           <LoadingSpinner isLoading={true} className="py-5" />
-        ) : (movie?.id && <iframe
+        ) : (movie?.id && movie?.videos && <iframe
           width="100%"
           height="500px"
-          src={`https://www.youtube.com/embed/${movie.videos[0].key}`}
+          src={`https://www.youtube.com/embed/${movie?.videos[0].key}`}
           title="YouTube video player"
           frameBorder="0"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"

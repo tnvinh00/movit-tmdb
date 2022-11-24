@@ -120,7 +120,7 @@ Button.defaultProps = {
   size: 'medium',
   shadow: true,
   classes: '',
-  minWidth: '180px',  
+  minWidth: '150px',  
 };
 
 export default Button;

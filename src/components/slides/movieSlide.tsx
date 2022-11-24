@@ -16,10 +16,10 @@ const MovieSlide = (props: IMovieSlideProps) => {
       slidesPerView={4}
       breakpoints={{
         320: {
-          slidesPerView: 1,
+          slidesPerView: 2,
         },
         480: {
-          slidesPerView: 1,
+          slidesPerView: 2,
         },
         640: {
           slidesPerView: 2,
@@ -39,7 +39,7 @@ const MovieSlide = (props: IMovieSlideProps) => {
         },
         1440: {
           slidesPerView: 6,
-          spaceBetween: 60,
+          spaceBetween: 20,
         },
       }}
     >

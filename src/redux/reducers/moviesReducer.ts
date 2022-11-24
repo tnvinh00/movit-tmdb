@@ -29,11 +29,11 @@ export const fetchNowPlayingMovies = createAsyncThunk(
   }
 );
 
-export const fetchMovieDetail = createAsyncThunk(
-  'movies/fetchMovieDetail',
+export const fetchDetail = createAsyncThunk(
+  'movies/fetchDetail',
   async (payload: any) => {
-    const { id } = payload;
-    const response = await TMDBApi.getDetail(CATEGORY.MOVIE, id);
+    const { category, id } = payload;
+    const response = await TMDBApi.getDetail(category, id);
     return response;
   }
 );
@@ -62,7 +62,7 @@ const initialState: any = {
 };
 
 const moviesSlice = createSlice({
-  name: 'movies',
+  name: 'moviesSlice',
   initialState,
   reducers: {
     setMovie: (state, action) => {
@@ -80,14 +80,17 @@ const moviesSlice = createSlice({
       .addCase(fetchNowPlayingMovies.fulfilled, (state, action) => {
         state.nowPlayingMovies = action.payload.data.results;
       })
-      .addCase(fetchMovieDetail.pending, (state) => {
+      .addCase(fetchDetail.pending, (state) => {
         state.isLoadingDetail = true;
       })
-      .addCase(fetchMovieDetail.fulfilled, (state, action) => {
+      .addCase(fetchDetail.fulfilled, (state, action) => {
         state.isLoadingDetail = false;
-        state.movie = action.payload;
+        state.movie = {
+          ...state.movie,
+          ...action.payload.data,
+        };
       })
-      .addCase(fetchMovieDetail.rejected, (state) => {
+      .addCase(fetchDetail.rejected, (state) => {
         state.isLoadingDetail = false;
         state.error = true;
       })
