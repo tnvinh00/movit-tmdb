@@ -22,7 +22,7 @@ const ToggleTheme = () => {
   return (
     <button
       type='button'
-      className='border border-gray-300 hover:text-white font-medium rounded-full p-4 text-center inline-flex items-center dark:hover:text-white text-xl'
+      className='border border-gray-300 hover:text-white font-medium rounded-full p-3.5 text-center inline-flex items-center dark:hover:text-white text-xl'
       onClick={toggle}
     >
       {darkMode ? (

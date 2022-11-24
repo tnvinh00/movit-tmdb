@@ -1,0 +1,9 @@
+@use '../../styles/scss/' as *;
+
+.movie-detail {
+  &__bg {
+    div {
+      @include linearOverlay(top);
+    }
+  }
+}

@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react';
 
-export type TypeButtonColor = 'primary' | 'secondary' | 'success' | 'danger' | 'warning' | 'info';
+export type TypeButtonColor = 'primary' | 'secondary' | 'success' | 'danger' | 'warning' | 'info' | 'light' | 'dark';
 
 export interface IButtonProps {
   label: string;
@@ -59,6 +59,12 @@ const Button = (props: IButtonProps) => {
         case 'info':
           buttonClass += 'text-blue-700 hover:text-white border-2 border-blue-700 hover:bg-blue-800 text-center dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:hover:bg-blue-600 ';
           break;
+        case 'light':
+          buttonClass += 'text-gray-200 hover:text-white border-2 border-gray-200 hover:bg-gray-800 text-center dark:border-gray-500 dark:text-gray-500 dark:hover:text-white dark:hover:bg-gray-600 ';
+          break;
+        case 'dark':
+          buttonClass += 'text-gray-800 hover:text-white border-2 border-gray-800 hover:bg-gray-800 text-center dark:border-gray-500 dark:text-gray-500 dark:hover:text-white dark:hover:bg-gray-600 ';
+          break;
       }
     } else {
       switch (color) {
@@ -79,6 +85,12 @@ const Button = (props: IButtonProps) => {
           break;
         case 'info':
           buttonClass += 'text-white bg-indigo-700 hover:bg-indigo-800 dark:bg-indigo-600 dark:hover:bg-indigo-700 '
+          break;
+        case 'light':
+          buttonClass += 'text-gray-800 bg-gray-200 hover:bg-gray-300 dark:bg-gray-500 dark:hover:bg-gray-600 '
+          break;
+        case 'dark':
+          buttonClass += 'text-white bg-gray-800 hover:bg-gray-900 dark:bg-gray-700 dark:hover:bg-gray-800 '
           break;
       };
     }

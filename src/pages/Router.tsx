@@ -3,7 +3,7 @@ import { Route, Routes } from "react-router-dom";
 
 import HomePage from "./HomePage";
 import CatalogPage from "./CatalogPage";
-import DetailPage from "./DetailPage";
+import DetailPage from "./DetailPage/DetailPage";
 import NotFoundPage from "./NotFoundPage";
 
 const AppRouter = () => {

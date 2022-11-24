@@ -20,7 +20,7 @@ const MovieCard = (props: IMovieCardProps) => {
           className="movie-card relative bg-top bg-cover bg-no-repeat mb-4 rounded-md h-96 md:h-80"
           style={{ backgroundImage: `url(${API_CONFIG.w500Image(item.poster_path || item.backdrop_path)})` }}
         >
-          <div className="movie-card__play hidden shadow-lg items-center justify-center h-full">
+          <div className="movie-card__play hidden shadow-2xl items-center justify-center h-full">
             <i className='bx bxl-youtube text-6xl'></i>
           </div>
         </div>
