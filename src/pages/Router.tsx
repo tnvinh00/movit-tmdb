@@ -11,7 +11,7 @@ const AppRouter = () => {
     <Routes>
       <Route path='/:category/search/:keyword' element={<CatalogPage />} />
       <Route path='/:category/:id' element={<DetailPage />} />
-      <Route path="/category" element={<CatalogPage />} />
+      <Route path="/:category" element={<CatalogPage />} />
       <Route path="/" element={<HomePage />} />
       <Route path="*" element={<NotFoundPage />} />
     </Routes>

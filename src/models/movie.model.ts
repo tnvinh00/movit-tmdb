@@ -1,19 +1,23 @@
 export default interface MovieModel {
-  adult: boolean;
-  backdrop_path: string;
-  genre_ids: number[];
-  id: number;
-  original_language: string;
-  original_title: string;
-  overview: string;
-  popularity: number;
-  poster_path: string;
-  release_date: string;
-  title: string;
-  video: boolean;
-  videos: VideoModel[];
-  vote_average: number;
-  vote_count: number;
+  adult?: boolean;
+  backdrop_path?: string;
+  genre_ids?: number[];
+  id?: number;
+  original_language?: string;
+  original_title?: string;
+  overview?: string;
+  popularity?: number;
+  poster_path?: string;
+  release_date?: string;
+  title?: string;
+  name?: string;
+  original_name?: string;
+  video?: boolean;
+  videos?: VideoModel[];
+  vote_average?: number;
+  vote_count?: number;
+  cast?: CastModel[];
+  genres?: any[];
 }
 
 export interface VideoModel {
@@ -27,4 +31,18 @@ export interface VideoModel {
   official: boolean;
   published_at: string;
   id: string;
+}
+
+export interface CastModel {
+  adult: boolean;
+  gender: number;
+  id: number;
+  known_for_department: string;
+  name: string;
+  original_name: string;
+  popularity: boolean;
+  profile_path: string;
+  credit_id: string;
+  department: string;
+  job: string;
 }

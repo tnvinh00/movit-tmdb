@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react';
 
 export interface IModalProps {
   title?: string;
@@ -16,11 +16,19 @@ export interface IModalProps {
 const Modal = (props: IModalProps) => {
   const { title, open, onClickClose, showFooter, showHeader, onCancel, onOk, okText, cancelText, children } = props;
 
+  useEffect(() => {
+    if (open) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'overlay';
+    }
+  }, [open]);
+
   return (open &&
     <div className="overflow-y-auto overflow-x-hidden fixed inset-0 z-50 p-4 w-full md:inset-0 h-modal md:h-full flex items-center justify-center">
       <div className="absolute inset-0 bg-gray-900 opacity-75" onClick={onClickClose}>
       </div>
-      <div className="min-height-100vh w-full max-w-4xl h-full md:h-auto">
+      <div className="w-full max-w-4xl">
         <div className="relative bg-white rounded-lg shadow dark:bg-gray-700">
           {showHeader ? (
             <>

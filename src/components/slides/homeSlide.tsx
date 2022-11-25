@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react'
+import React, { useState, useRef, useEffect } from 'react'
 import SwiperCore, { Autoplay } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import './homeSlide.scss';
@@ -24,6 +24,14 @@ const HomeSlide = (props: IHomeSlideProps) => {
   const { movie, isLoadingVideo } = useAppSelector((state: RootState) => state.movies);
 
   const swiperRef = useRef(null);
+  const iframeRef = useRef(null);
+
+  useEffect(() => {
+    if (showModal && !isLoadingVideo) {
+      const height = iframeRef.current.offsetWidth * 9 / 16 + 'px';
+      iframeRef.current.setAttribute('height', height);
+    }
+  }, [showModal, isLoadingVideo]);
 
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
@@ -65,15 +73,16 @@ const HomeSlide = (props: IHomeSlideProps) => {
         spaceBetween={0}
         loop={true}
         slidesPerView={1}
+        className='min-h-[32rem] md:min-h-screen'
         autoplay={{
-          delay: 5000,
+          delay: 6000,
           pauseOnMouseEnter: true,
           disableOnInteraction: false
         }}
       >
         {
-          items.map((item, i) => (
-            <SwiperSlide key={i}>
+          items.map((item) => (
+            <SwiperSlide key={item.id}>
               {({ isActive }) => (
                 <div
                   className={'relative bg-cover bg-no-repeat bg-center home-slide__item ' + (isActive ? 'active' : '')}
@@ -113,10 +122,10 @@ const HomeSlide = (props: IHomeSlideProps) => {
           <LoadingSpinner isLoading={true} className="py-5" />
         ) : (movie?.id && movie?.videos && <iframe
           width="100%"
-          height="500px"
           src={`https://www.youtube.com/embed/${movie?.videos[0].key}`}
           title="YouTube video player"
           frameBorder="0"
+          ref={iframeRef}
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
           allowFullScreen></iframe>
         )}

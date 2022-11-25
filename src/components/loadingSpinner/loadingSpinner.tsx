@@ -1,6 +1,11 @@
 import React from 'react';
 
-const LoadingSpinner = (props: any) => {
+export interface ILoadingSpinnerProps {
+  isLoading?: boolean;
+  className?: string;
+}
+
+const LoadingSpinner = (props: ILoadingSpinnerProps) => {
   const { isLoading, className } = props;
   return (
     isLoading && (

@@ -1,6 +1,7 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import TMDBApi from 'api/tmdbApi';
 import { CATEGORY, MOVIETYPE } from 'constants/apiConstant';
+import MovieModel from 'models/movie.model';
 
 export const fetchPopularMovies = createAsyncThunk(
   'movies/fetchPopularMovies',
@@ -29,6 +30,15 @@ export const fetchNowPlayingMovies = createAsyncThunk(
   }
 );
 
+export const fetchUpComingMovies = createAsyncThunk(
+  'movies/fetchUpComingMovies',
+  async (payload: any) => {
+    const { page } = payload;
+    const response = await TMDBApi.getMoviesList(MOVIETYPE.UPCOMING, { page });
+    return response;
+  }
+);
+
 export const fetchDetail = createAsyncThunk(
   'movies/fetchDetail',
   async (payload: any) => {
@@ -38,20 +48,65 @@ export const fetchDetail = createAsyncThunk(
   }
 );
 
+export const fetchSimilarMovie = createAsyncThunk(
+  'movies/fetchSimilarMovie',
+  async (payload: any) => {
+    const { id, category, page } = payload;
+    const response = await TMDBApi.similar(category, id, { page });
+    return response;
+  },
+);
+
+export const fetchRecommendMovie = createAsyncThunk(
+  'movies/fetchRecommendMovie',
+  async (payload: any) => {
+    const { id, category, page } = payload;
+    const response = await TMDBApi.getRecommendations(category, id, { page });
+    return response;
+  },
+);
+
 export const getMovieVideo = createAsyncThunk(
   'movies/getMovieVideo',
   async (payload: any) => {
-    const { id } = payload;
-    const response = await TMDBApi.getVideos(CATEGORY.MOVIE, id);
+    const { category, id } = payload;
+    const response = await TMDBApi.getVideos(category, id);
     return response;
   }
 );
 
-const initialState: any = {
+export const getMovieCredits = createAsyncThunk(
+  'movies/getMovieCredits',
+  async (payload: any) => {
+    const { category, id } = payload;
+    const response = await TMDBApi.getCredit(category, id);
+    return response;
+  }
+);
+
+export interface MovieState {
+  popularMovies: MovieModel[];
+  topRatedMovies: MovieModel[];
+  nowPlayingMovies: MovieModel[];
+  upcomingMovies: MovieModel[];
+  similarMovies: MovieModel[];
+  recommendMovies: MovieModel[];
+  movie: MovieModel;
+  isLoading: boolean;
+  isLoadingVideo: boolean;
+  isLoadingDetail: boolean;
+  isLoadingMore: boolean;
+  error: boolean;
+  page: number;
+}
+
+const initialState: MovieState = {
   popularMovies: [],
   topRatedMovies: [],
   nowPlayingMovies: [],
   upcomingMovies: [],
+  similarMovies: [],
+  recommendMovies: [],
   movie: {},
   isLoading: false,
   isLoadingVideo: false,
@@ -80,15 +135,24 @@ const moviesSlice = createSlice({
       .addCase(fetchNowPlayingMovies.fulfilled, (state, action) => {
         state.nowPlayingMovies = action.payload.data.results;
       })
+      .addCase(fetchUpComingMovies.fulfilled, (state, action) => {
+        state.upcomingMovies = action.payload.data.results;
+      })
+      .addCase(fetchSimilarMovie.fulfilled, (state, action) => {
+        state.similarMovies = action.payload.data.results;
+      })
+      .addCase(fetchRecommendMovie.fulfilled, (state, action) => {
+        state.recommendMovies = action.payload.data.results;
+      })
       .addCase(fetchDetail.pending, (state) => {
         state.isLoadingDetail = true;
       })
       .addCase(fetchDetail.fulfilled, (state, action) => {
-        state.isLoadingDetail = false;
         state.movie = {
           ...state.movie,
           ...action.payload.data,
         };
+        state.isLoadingDetail = false;
       })
       .addCase(fetchDetail.rejected, (state) => {
         state.isLoadingDetail = false;
@@ -98,13 +162,17 @@ const moviesSlice = createSlice({
         state.isLoadingVideo = true;
       })
       .addCase(getMovieVideo.fulfilled, (state, action) => {
-        state.isLoadingVideo = false;
         state.movie.videos = action.payload.data.results;
+        state.isLoadingVideo = false;
       })
       .addCase(getMovieVideo.rejected, (state) => {
         state.isLoadingVideo = false;
         state.error = true;
-      });
+      })
+      .addCase(getMovieCredits.fulfilled, (state, action) => {
+        state.movie.cast = action.payload.data.cast;
+        state.isLoadingVideo = false;
+      })
   },
 });
 

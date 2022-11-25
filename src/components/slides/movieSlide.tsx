@@ -5,10 +5,11 @@ import { SwiperSlide, Swiper } from 'swiper/react';
 
 export interface IMovieSlideProps {
   items: MovieModel[];
+  showRate?: boolean;
 };
 
 const MovieSlide = (props: IMovieSlideProps) => {
-  const { items } = props;
+  const { items, showRate } = props;
   return (
     <Swiper
       grabCursor={true}
@@ -43,9 +44,9 @@ const MovieSlide = (props: IMovieSlideProps) => {
         },
       }}
     >
-      {items.map((item, index) => (
-        <SwiperSlide key={index}>
-          <MovieCard item={item} />
+      {items.map((item) => (
+        <SwiperSlide key={item.id}>
+          <MovieCard item={item} showRate={showRate} />
         </SwiperSlide>
       ))}
     </Swiper>
@@ -53,7 +54,8 @@ const MovieSlide = (props: IMovieSlideProps) => {
 };
 
 MovieSlide.defaultProps = {
-  items: []
+  items: [],
+  showRate: true,
 };
 
 export default MovieSlide;

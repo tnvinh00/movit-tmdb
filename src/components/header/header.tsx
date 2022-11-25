@@ -23,7 +23,7 @@ const Header = () => {
   const { pathname } = useLocation();
   const headerRef = useRef(null);
 
-  const active = headerNav.findIndex(e => e.path === pathname);
+  const active = headerNav.findIndex(e => e.path === `/${pathname.split('/')[1]}`);
 
   useEffect(() => {
     const shrinkHeader = () => {
@@ -43,12 +43,14 @@ const Header = () => {
     <div ref={headerRef} className="header z-10">
       <div className="header__wrap">
         <div className="logo">
-          <img src={logo} alt="" />
+          <Link to="/">
+            <img src={logo} alt="" />
+          </Link>
         </div>
         <ul className="header__nav">
           {
             headerNav.map((e, i) => (
-              <li key={i} className={`${i === active ? 'active' : ''}`}>
+              <li key={i} className={`${i === active ? 'active ' : ' '}` + 'text-black dark:text-white'}>
                 <Link to={e.path}>
                   {e.label}
                 </Link>

@@ -1,7 +1,9 @@
 import { CATEGORY } from "../constants/apiConstant";
 import axiosClient from "./axiosClient";
+import { CastModel } from '../models/movie.model';
 
 export interface IResponse {
+  cast: CastModel[];
   page?: number;
   results?: any;
   total_pages?: number;
@@ -9,6 +11,14 @@ export interface IResponse {
 }
 
 const TMDBApi = {
+  getList: (category: string, type: string, params: any) => {
+    try {
+      const url = `/${category}/${type}`;
+      return axiosClient.get<IResponse>(url, { params });
+    } catch (error) {
+      throw error;
+    }
+  },
   getMoviesList: (type: string, params = {}) => {
     try {
       const url = CATEGORY.MOVIE + "/" + type;
@@ -33,9 +43,9 @@ const TMDBApi = {
       throw error;
     }
   },
-  search: (category: keyof typeof CATEGORY, params = {}) => {
+  search: (category: string, params = {}) => {
     try {
-      const url = "search/" + CATEGORY[category];
+      const url = "search/" + category;
       return axiosClient.get<IResponse>(url, { params });
     } catch (error) {
       throw error;
@@ -49,22 +59,46 @@ const TMDBApi = {
       throw error;
     }
   },
-  credit: (category: keyof typeof CATEGORY, id: number, params = {}) => {
+  credit: (category: string, id: number, params = {}) => {
     try {
-      const url = CATEGORY[category] + "/" + id + "/credits";
+      const url = category + "/" + id + "/credits";
       return axiosClient.get<IResponse>(url, { params });
     } catch (error) {
       throw error;
     }
   },
-  similar: (category: keyof typeof CATEGORY, id: number, params = {}) => {
+  similar: (category: string, id: number, params = {}) => {
     try {
-      const url = CATEGORY[category] + "/" + id + "/similar";
-      return axiosClient.get<IResponse>(url, params);
+      const url = category + "/" + id + "/similar";
+      return axiosClient.get<IResponse>(url, { params });
     } catch (error) {
       throw error;
     }
   },
+  getReviews: (category: string, id: number, params = {}) => {
+    try {
+      const url = category + "/" + id + "/reviews";
+      return axiosClient.get<IResponse>(url, { params });
+    } catch (error) {
+      throw error;
+    }
+  },
+  getCredit: (category: string, id: number, params = {}) => {
+    try {
+      const url = category + "/" + id + "/credits";
+      return axiosClient.get<IResponse>(url, { params });
+    } catch (error) {
+      throw error;
+    }
+  },
+  getRecommendations: (category: string, id: number, params = {}) => {
+    try {
+      const url = category + "/" + id + "/recommendations";
+      return axiosClient.get<IResponse>(url, { params });
+    } catch (error) {
+      throw error;
+    }
+  }
 };
 
 export default TMDBApi;
