@@ -22,9 +22,13 @@ const CatalogPage = () => {
   const [typeList, setTypeList] = useState([]);
   const [type, setType] = useState<MovieType | TVsType>();
 
-  const { data, isLoading, isLoadingMore, page, totalPage } = useAppSelector(state => state.catalog);
+  const { data, page, totalPage } = useAppSelector(state => state.catalog);
 
   useEffect(() => {
+    if (category !== 'movie' && category !== 'tv') {
+      navigate('/404');
+      return;
+    }
     const temp = Object.entries(category === 'movie' ? MOVIETYPE : TVTYPE).map(([key, value]) => ({
       key: key.replace('_', ' '),
       value

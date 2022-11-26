@@ -13,6 +13,7 @@ const AppRouter = () => {
       <Route path='/:category/:id' element={<DetailPage />} />
       <Route path="/:category" element={<CatalogPage />} />
       <Route path="/" element={<HomePage />} />
+      <Route path="404" element={<NotFoundPage />} />
       <Route path="*" element={<NotFoundPage />} />
     </Routes>
   );
