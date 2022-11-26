@@ -33,7 +33,7 @@ const MovieCard = (props: IMovieCardProps) => {
             {momment(item.release_date).fromNow()}
           </span>
         </div>}
-        <h2 className='text-lg text-gray-900 dark:text-white'>
+        <h2 className='text-lg font-bold text-gray-900 dark:text-white'>
           {item.title || item.name} {item.title !== item.original_title && `(${item.original_title})`}
         </h2>
       </div>
