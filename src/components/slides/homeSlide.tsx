@@ -73,7 +73,7 @@ const HomeSlide = (props: IHomeSlideProps) => {
         spaceBetween={0}
         loop={true}
         slidesPerView={1}
-        className='min-h-[32rem] md:min-h-screen'
+        className='min-h-[32rem] md:min-[80vh]'
         autoplay={{
           delay: 6000,
           pauseOnMouseEnter: true,

@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useAppSelector, useAppDispatch } from 'hooks';
 import { RootState } from 'redux/store';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { fetchDetail, getMovieVideo, getMovieCredits, fetchSimilarMovie, fetchRecommendMovie } from 'redux/reducers/moviesReducer';
 import API_CONFIG from 'api/apiConfig';
 import './DetailPage.scss';
@@ -14,11 +14,16 @@ import VideoBlock from 'components/videoBlock/videoBlock';
 
 const DetailPage = () => {
   const { category, id } = useParams();
+  const navigate = useNavigate();
   const { movie, isLoadingDetail, similarMovies, recommendMovies } = useAppSelector((state: RootState) => state.movies);
 
   const dispatch = useAppDispatch();
 
   useEffect(() => {
+    if (id === 'search') {
+      navigate('/' + category);
+      return;
+    }
     dispatch(fetchDetail({
       id: Number(id),
       category: category

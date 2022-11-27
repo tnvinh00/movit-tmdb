@@ -28,7 +28,7 @@ const HomePage = () => {
   }, []);
 
   return (
-    <div>
+    <>
       <HomeSlide items={popularMovies.slice(0, 10)} />
       {/* Trending */}
 
@@ -57,7 +57,7 @@ const HomePage = () => {
         </BlockQuote>
         <MovieSlide items={upcomingMovies} showRate={false} />
       </div>
-    </div>
+    </>
   )
 }
 
