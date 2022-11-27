@@ -3,11 +3,11 @@ import { useParams } from 'react-router-dom';
 import { useAppSelector, useAppDispatch } from 'hooks';
 import { fetchCatalogList, fetchSearchList, fetchCatalogMore, fetchSearchMoreList } from 'redux/reducers/catalogReducer';
 import CatalogCard from '../components/cards/catalogCard';
-import MovieModel from 'models/movie.model';
 import SearchInput from 'components/searchInput/searchInput';
 import { MOVIETYPE, TVTYPE } from 'constants/apiConstant';
 import Button from 'components/button/button';
 import { useNavigate } from 'react-router-dom';
+import ScrollReveal from 'components/scrollReveal/scrollReveal';
 
 export type MovieType = typeof MOVIETYPE[keyof typeof MOVIETYPE];
 
@@ -103,7 +103,7 @@ const CatalogPage = () => {
         {page < totalPage && (
           <div className='w-full flex justify-center'>
             <Button
-              color='primary'
+              color='danger'
               label='Load more'
               icon={<i className='bx bx-arrow-to-bottom ml-2'></i>}
               iconPosition='right'

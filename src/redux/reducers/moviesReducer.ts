@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import TMDBApi from 'api/tmdbApi';
-import { CATEGORY, MOVIETYPE } from 'constants/apiConstant';
+import { MOVIETYPE } from 'constants/apiConstant';
 import MovieModel from 'models/movie.model';
 
 export const fetchPopularMovies = createAsyncThunk(
